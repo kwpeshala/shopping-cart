@@ -8,6 +8,7 @@ const Field = (props)=> {
             {props.filedCategory=="inputField" &&
                 <InputField fieldName={props.fieldName}
                             field={props.field}
+                            fieldMin ={props.fieldMin}
                             fieldType={props.fieldType}
                             fieldChange={props.fieldChange}
                             fieldRequired={props.fieldRequired}
@@ -20,8 +21,8 @@ const Field = (props)=> {
                 field={props.field}
                 fieldChange={props.fieldChange}
                 fieldRequired={props.fieldRequired}
-                optionList={props.optionList.map(gender => (
-                    <option key={gender}>{gender}</option>
+                optionList={props.optionList.map(item => (
+                    <option key={item}>{item}</option>
                 ))}
             />
             }

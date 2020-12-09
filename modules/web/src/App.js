@@ -1,8 +1,9 @@
 import './App.css';
-import RegistrationForm from "./view/RegistrationForm";
+import PriceListTable from "./view/PriceListTable";
 import SuccessUserCreation from "./view/SuccessUserCreation"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Home from "./view/Home";
+import PriceCalculator from "./view/PriceCalculator";
 
 function App() {
   return (
@@ -11,9 +12,9 @@ function App() {
         <div className="container">
           <Switch>
               <header className="App-header">
-                  <Route path="/" exact component = {Home}></Route>
-                  <Route path = "/registration" exact component = {RegistrationForm}></Route>
-                  <Route path = "/success" exact component = {SuccessUserCreation} ></Route>
+                  {/*<Route path="/" exact component = {Home}></Route>*/}
+                  <Route path = "/" exact component = {PriceListTable}></Route>
+                  <Route path = "/price/calculator" exact component = {PriceCalculator} ></Route>
               </header>
 
           </Switch>

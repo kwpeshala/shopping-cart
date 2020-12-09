@@ -9,6 +9,7 @@ const InputField = (props) => {
             <input className="field"
                    name={props.field}
                    type={props.fieldType}
+                   min = {props.fieldMin}
                    onChange={props.fieldChange}
                    required={props.fieldRequired}/>
 
