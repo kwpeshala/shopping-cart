@@ -14,11 +14,11 @@ import java.util.List;
 @Repository
 public class CartonRepositoryImpl implements CartonRepository {
     private final JdbcTemplate jdbcTemplate;
-    private final String SELECT_CARON_LIST="SELECT * FROM carton;";
-    private final String SELECT_CARON_BY_PRODUCT_ID="SELECT * FROM carton WHERE product_id=?;";
+    private final String SELECT_CARON_LIST = "SELECT * FROM carton;";
+    private final String SELECT_CARON_BY_PRODUCT_ID = "SELECT * FROM carton WHERE product_id=?;";
 
     @Autowired
-    public CartonRepositoryImpl(JdbcTemplate jdbcTemplate){
+    public CartonRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -37,7 +37,7 @@ public class CartonRepositoryImpl implements CartonRepository {
         return jdbcTemplate.queryForObject(SELECT_CARON_BY_PRODUCT_ID, new RowMapper<Carton>() {
             @Override
             public Carton mapRow(ResultSet resultSet, int i) throws SQLException {
-                Carton carton = new CartonRowMapper().mapRow(resultSet,i);
+                Carton carton = new CartonRowMapper().mapRow(resultSet, i);
                 return carton;
             }
         }, productId);

@@ -56,10 +56,10 @@ public class PriceCalculatorImpl implements PriceCalculator {
         logger.info("Requesting for calculator");
         int noOfItems = Integer.parseInt(numberOfItems);
 
-        if (purchaseType.toLowerCase().equals("carton")){
+        if (purchaseType.toLowerCase().equals("carton")) {
             return Double.parseDouble(decimalFormat.format(getTotalPriceByCarton(noOfItems, productName)));
         } else {
-            return Double.parseDouble(decimalFormat.format(getTotalPriceByUnit(noOfItems,productName)));
+            return Double.parseDouble(decimalFormat.format(getTotalPriceByUnit(noOfItems, productName)));
         }
     }
 
@@ -72,9 +72,9 @@ public class PriceCalculatorImpl implements PriceCalculator {
 
         if (numberOfUnits % unitsPerCarton == 0) {
             if (numberOfUnits / unitsPerCarton >= 3) {
-                price = (int)(numberOfUnits / unitsPerCarton) * cartonPrice * (1 - discountPercentage / 100);
+                price = (int) (numberOfUnits / unitsPerCarton) * cartonPrice * (1 - discountPercentage / 100);
             } else {
-                price = (int)(numberOfUnits / unitsPerCarton) * cartonPrice;
+                price = (int) (numberOfUnits / unitsPerCarton) * cartonPrice;
             }
         } else {
             int numberOfSingleUnits = numberOfUnits % unitsPerCarton;
@@ -97,22 +97,22 @@ public class PriceCalculatorImpl implements PriceCalculator {
         return priceListApi;
     }
 
-    private double getTotalPriceByCarton(int numberOfCartons, String productName){
+    private double getTotalPriceByCarton(int numberOfCartons, String productName) {
         int productId = productRepository.getProductIdByName(productName);
         Carton carton = cartonRepository.getCartonByProductId(productId);
-        if (numberOfCartons>=3){
-            return numberOfCartons* carton.getCartonPrice()*(1-discountPercentage/100);
+        if (numberOfCartons >= 3) {
+            return numberOfCartons * carton.getCartonPrice() * (1 - discountPercentage / 100);
 
-        }else {
-            return  numberOfCartons * carton.getCartonPrice();
+        } else {
+            return numberOfCartons * carton.getCartonPrice();
         }
     }
 
-    private double getTotalPriceByUnit(int numberOfUnits, String productName){
+    private double getTotalPriceByUnit(int numberOfUnits, String productName) {
         int productId = productRepository.getProductIdByName(productName);
         Carton carton = cartonRepository.getCartonByProductId(productId);
         PriceListApi priceListApi = getPriceListApi(numberOfUnits, carton.getCartonPrice(), carton.getUnitsPerCarton(), productId);
-        return  priceListApi.getPrice();
+        return priceListApi.getPrice();
     }
 
 }

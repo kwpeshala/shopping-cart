@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+
 class PriceListTable extends Component {
 
     constructor(prop) {
@@ -6,7 +7,7 @@ class PriceListTable extends Component {
 
         this.state = {
             isLoading: true,
-            priceList: [{"productName":"", "numberOfUnits":"", "price":""}]
+            priceList: [{"productName": "", "numberOfUnits": "", "price": ""}]
         };
     }
 
@@ -16,7 +17,7 @@ class PriceListTable extends Component {
         const priceListBody = await priceListResponse.json();
 
         this.setState({
-            isLoading: false, priceList:priceListBody
+            isLoading: false, priceList: priceListBody
         });
 
 

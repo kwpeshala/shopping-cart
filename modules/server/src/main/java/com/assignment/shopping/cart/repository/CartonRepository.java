@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface CartonRepository {
     public List<Carton> getCartonList();
+
     public Carton getCartonByProductId(int productId);
 }

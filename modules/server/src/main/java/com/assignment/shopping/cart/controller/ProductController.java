@@ -1,6 +1,5 @@
 package com.assignment.shopping.cart.controller;
 
-import com.assignment.shopping.cart.entity.Product;
 import com.assignment.shopping.cart.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +12,12 @@ public class ProductController {
     private final ProductService productService;
 
     @Autowired
-    public ProductController(ProductService productService){
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping(value = "/api/product")
-    public List<String> getListOfProducts(){
+    public List<String> getListOfProducts() {
         return productService.getProductList();
     }
 }

@@ -13,7 +13,7 @@ public class PriceCalculatorImplTest {
     PriceCalculatorImpl priceCalculator;
 
     @Test
-    public void priceCalculatorTest(){
+    public void priceCalculatorTest() {
         double totalPrice = priceCalculator.getTotalPrice("Penguin-ears", "carton", "5");
         assertThat(totalPrice).isEqualTo(787.50);
 

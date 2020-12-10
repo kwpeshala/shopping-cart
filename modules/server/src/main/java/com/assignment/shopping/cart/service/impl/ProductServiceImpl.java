@@ -1,6 +1,5 @@
 package com.assignment.shopping.cart.service.impl;
 
-import com.assignment.shopping.cart.entity.Product;
 import com.assignment.shopping.cart.repository.ProductRepository;
 import com.assignment.shopping.cart.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository){
+    public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

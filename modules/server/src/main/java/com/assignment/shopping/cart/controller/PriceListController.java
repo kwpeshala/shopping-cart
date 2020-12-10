@@ -14,12 +14,12 @@ public class PriceListController {
     private final PriceCalculator priceCalculator;
 
     @Autowired
-    public PriceListController(PriceCalculator priceCalculator){
+    public PriceListController(PriceCalculator priceCalculator) {
         this.priceCalculator = priceCalculator;
     }
 
     @GetMapping(value = "/price/list")
-    public List<PriceListApi> getPriceList(){
+    public List<PriceListApi> getPriceList() {
         return priceCalculator.getPriceList();
     }
 

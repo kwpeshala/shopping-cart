@@ -12,13 +12,13 @@ public class PriceCalculatorController {
     private final PriceCalculator priceCalculator;
 
     @Autowired
-    public PriceCalculatorController(PriceCalculator priceCalculator){
+    public PriceCalculatorController(PriceCalculator priceCalculator) {
         this.priceCalculator = priceCalculator;
     }
 
     @GetMapping(value = "/api/calculator")
     @ResponseBody
-    public double totalPrice (@RequestParam String productName, @RequestParam String purchaseType, @RequestParam String numberOfItems){
+    public double totalPrice(@RequestParam String productName, @RequestParam String purchaseType, @RequestParam String numberOfItems) {
         return priceCalculator.getTotalPrice(productName, purchaseType, numberOfItems);
     }
 }
