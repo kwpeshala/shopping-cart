@@ -10,6 +10,7 @@ const Field = (props)=> {
                             field={props.field}
                             fieldMin ={props.fieldMin}
                             fieldType={props.fieldType}
+                            fieldValue={props.fieldValue}
                             fieldChange={props.fieldChange}
                             fieldRequired={props.fieldRequired}
 
@@ -20,6 +21,7 @@ const Field = (props)=> {
                 fieldName={props.fieldName}
                 field={props.field}
                 fieldChange={props.fieldChange}
+                fieldValue ={props.fieldValue}
                 fieldRequired={props.fieldRequired}
                 optionList={props.optionList.map(item => (
                     <option key={item}>{item}</option>

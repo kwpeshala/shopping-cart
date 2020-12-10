@@ -45,15 +45,15 @@ class PriceListTable extends Component {
                 <table className="priceList">
                     <tr>
                         <th>Product Name</th>
-                        <th>Number of Units</th>
-                        <th>Price</th>
+                        <th className="numer-align">Number of Units</th>
+                        <th className="numer-align">Price</th>
                     </tr>
 
                     {this.state.priceList.map((item) => {
                         return <tr>
                             <td>{item.productName}</td>
-                            <td>{item.numberOfUnits}</td>
-                            <td>{item.price}</td>
+                            <td className="numer-align">{item.numberOfUnits}</td>
+                            <td className="numer-align">{item.price.toFixed(2)}</td>
                         </tr>
 
                     })}

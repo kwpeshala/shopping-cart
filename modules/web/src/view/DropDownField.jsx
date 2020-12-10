@@ -9,6 +9,7 @@ const DropDownField = (props) => {
             <select className="field"
                 name={props.field}
                 onChange={props.fieldChange}
+                value={props.fieldValue}
                 required={props.fieldRequired}>
                 {props.optionList}
             </select>

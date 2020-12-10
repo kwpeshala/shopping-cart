@@ -8,13 +8,16 @@ class PriceCalculator extends Component {
         super(prop);
 
         this.state = {
-            isLoading: true,
+            isLoading: false,
             productList: [],
             purchaseTypeList: ["carton", "unit"],
             purchaseType : "carton",
             productName: "",
-            totalPrice:0.00
+            totalPrice:0.00,
+            numberOfItems:0
         };
+
+        this.baseState = this.state
     }
 
 
@@ -37,9 +40,9 @@ class PriceCalculator extends Component {
         }
 
         const fields=[
-            {filedCategory:"dropDownField", fieldName:"Product  ", field:"productName", fieldRequired:true, optionList:this.state.productList},
-            {filedCategory:"dropDownField", fieldName:"Purchase Type  ", field:"purchaseType", fieldRequired:true, optionList:this.state.purchaseTypeList},
-            {filedCategory:"inputField", fieldName:"Number of Items * ", field:"numberOfItems", fieldType:"number", fieldRequired:true, fieldMin:0}
+            {filedCategory:"dropDownField", fieldName:"Product  ", field:"productName", fieldRequired:true, optionList:this.state.productList, fieldValue:this.state.productName},
+            {filedCategory:"dropDownField", fieldName:"Purchase Type  ", field:"purchaseType", fieldRequired:true, optionList:this.state.purchaseTypeList, fieldValue:this.state.purchaseType},
+            {filedCategory:"inputField", fieldName:"Number of Items * ", field:"numberOfItems", fieldType:"number", fieldRequired:true, fieldMin:0, fieldValue:this.state.numberOfItems}
             ];
 
         const changeHandler = (event) => {
@@ -50,17 +53,17 @@ class PriceCalculator extends Component {
 
         const handleSubmit =async dispatch => {
             dispatch.preventDefault();
-            const ll = await fetch(`/api/calculator?productName=${this.state.productName}&purchaseType=${this.state.purchaseType}&numberOfItems=${this.state.numberOfItems}`);
-            const  kk = await  ll.json();
-            console.log(kk);
-            this.setState({totalPrice:kk});
-            console.log(this.state.totalPrice)
-            // this.props.history.push("./success");
+            const totalPriceResponse = await fetch(`/api/calculator?productName=${this.state.productName}&purchaseType=${this.state.purchaseType}&numberOfItems=${this.state.numberOfItems}`);
+            const  totalPriceResponseBody = await  totalPriceResponse.json();
+            this.setState({totalPrice:totalPriceResponseBody});
         };
 
         const handleClear=(e)=>{
-
-            this.setState({"totalPrice":0.00, "numberOfItems":0})
+            this.setState({totalPrice:0,
+                productName:this.state.productList[0],
+                purchaseType:this.state.purchaseTypeList[0],
+                numberOfItems: 0
+            })
 
         };
 
@@ -87,6 +90,7 @@ class PriceCalculator extends Component {
                                           fieldMin ={item.fieldMin}
                                           fieldType={item.fieldType}
                                           fieldChange={changeHandler}
+                                          fieldValue={item.fieldValue}
                                           fieldRequired={item.fieldRequired}
                                           optionList={item.optionList}
                             />
@@ -94,16 +98,12 @@ class PriceCalculator extends Component {
                     </div>
 
                     <div className="submit">
+                        <button onClick={handleClear}>Clear</button>
                         <button>Submit</button>
-                        {/*<button onChange={this.componentDidMount()}>Clear</button>*/}
                     </div>
-
-
                 </form>
-                <div>
-                    <button onClick={handleClear}>Clear</button>
-                </div>
-                <div>Total Price : {this.state.totalPrice}</div>
+
+                <div>Total Price : {this.state.totalPrice.toFixed(2)}</div>
             </div>
         );
     }

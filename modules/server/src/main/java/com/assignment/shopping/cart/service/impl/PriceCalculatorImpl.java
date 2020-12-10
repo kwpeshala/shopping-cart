@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class PriceCalculatorImpl implements PriceCalculator {
     private double increasePercentage = 30;
     private double discountPercentage = 10;
 
+    private static DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
     @Autowired
     public PriceCalculatorImpl(CartonRepository cartonRepository, ProductRepository productRepository) {
         this.cartonRepository = cartonRepository;
@@ -30,7 +33,7 @@ public class PriceCalculatorImpl implements PriceCalculator {
 
     @Override
     public List<PriceListApi> getPriceList() {
-        logger.info("requesting for priceList");
+        logger.info("Requesting for priceList");
         List<Carton> listOfCarton = cartonRepository.getCartonList();
         List<PriceListApi> priceListApis = new ArrayList<>();
         for (int i = 1; i <= 50; i++) {
@@ -50,13 +53,13 @@ public class PriceCalculatorImpl implements PriceCalculator {
 
     @Override
     public double getTotalPrice(String productName, String purchaseType, String numberOfItems) {
-        logger.info("Request for calculator");
+        logger.info("Requesting for calculator");
         int noOfItems = Integer.parseInt(numberOfItems);
 
         if (purchaseType.toLowerCase().equals("carton")){
-            return getTotalPriceByCarton(noOfItems, productName);
+            return Double.parseDouble(decimalFormat.format(getTotalPriceByCarton(noOfItems, productName)));
         } else {
-            return getTotalPriceByUnit(noOfItems,productName);
+            return Double.parseDouble(decimalFormat.format(getTotalPriceByUnit(noOfItems,productName)));
         }
     }
 
@@ -85,7 +88,7 @@ public class PriceCalculatorImpl implements PriceCalculator {
             }
 
         }
-
+        price = Double.parseDouble(decimalFormat.format(price));
         PriceListApi priceListApi = new PriceListApi();
         priceListApi.setNumberOfUnits(numberOfUnits);
         priceListApi.setProductName(productName);

@@ -10,6 +10,7 @@ const InputField = (props) => {
                    name={props.field}
                    type={props.fieldType}
                    min = {props.fieldMin}
+                   value={props.fieldValue}
                    onChange={props.fieldChange}
                    required={props.fieldRequired}/>
 
